@@ -1,0 +1,194 @@
+local Library = loadstring(game:HttpGet("https://pastebin.com/raw/kpLzpNXc"))()
+local Window = Library:CreateWindow("Porn", Vector2.new(250, 400), Enum.KeyCode.RightShift)
+local AimingTab = Window:CreateTab("Main")
+
+-- Lock
+local V3 = Vector3.new
+local V2 = Vector2.new
+local inf = math.huge
+getgenv().Settings = {
+    ["FearLas"] = {
+        ["Enabled"] = false,
+        ["DOT"] = true,
+        ["AIRSHOT"] = true,
+        ["Prediction"] = {
+            ["Horizontal"] = 0.185,
+            ["Vertical"] = 0.1,
+        },
+        ["CamPrediction"] = {
+            ["Prediction"] = {
+                ["Horizontal"] = 0.185,
+                ["Vertical"] = 0.1,
+            },
+        },
+        ["NOTIF"] = true,
+        ["AUTOPRED"] = true,
+        ["AdvancedAutoPred"] = true,
+        ["FOV"] = inf,
+        ["RESOLVER"] = false,
+        ["LOCKTYPE"] = "Namecall",
+        ["TargetStats"] = false,
+        ["Resolver"] = {
+              ["Enabled"] = false,
+              ["Type"] = "None",
+        },
+       ["Camera"] = {
+        ["Enabled"] = false,
+        ["HoodCustomsBypass"] = false,
+     },
+        ["OnHit"] = {
+             ["Enabled"] = true,
+             ["Hitchams"] = {
+                  ["Enabled"] = false,
+                  ["Color"] = Color3.fromRGB(0,0,139),
+                  ["Transparency"] = 0,
+                  ["Material"] = "ForceField",
+             },
+            ["Hitsound"] = {
+                  ["Enabled"] = false,
+                  ["Sound"] = "hitsounds/sparkle.wav",
+                  ["Volume"] = 2,
+            },
+        }
+    },
+	["Silent"] = {
+		["Enabled"] = false,
+		["AimPart"] = "HumanoidRootPart",
+		["WallCheck"] = false,
+		["Visualize"] = false,
+		["Prediction"] = {
+		   ["Horizontal"] = 0.15,
+		   ["Vertical"] = 0.05,
+		},
+	    ["AutoPrediction"] = {
+	        ["Enabled"] = true,
+	        ["Type"] = "Normal", --//Normal, Custom
+           ["ping20_30"] = 0.12588,
+           ["ping30_40"] = 0.11911,
+           ["ping40_50"] = 0.12471,
+           ["ping50_60"] = 0.13766,
+           ["ping60_70"] = 0.13731,
+           ["ping70_80"] = 0.13951,
+           ["ping80_90"] = 0.14181,
+           ["ping90_100"] = 0.148,
+           ["ping100_110"] = 0.156,
+           ["ping110_120"] = 0.1567,
+           ["ping120_130"] = 0.1601,
+           ["ping130_140"] = 0.1637,
+           ["ping140_150"] = 0.173,
+           ["ping150_160"] = 0.1714,
+           ["ping160_170"] = 0.1863,
+           ["ping170_180"] = 0.1872,
+           ["ping180_190"] = 0.1848,
+           ["ping190_200"] = 0.1865,
+	    },
+		["Mode"] = "Namecall", --index,namecal
+	},
+
+getgenv().keytoclick = "C"
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = keytoclick
+tool.Activated:connect(function()
+    local vim = game:service("VirtualInputManager")
+vim:SendKeyEvent(true, keytoclick, false, game)
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
+wait(0.2)
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/Dynissimo/main/Scripts/AkaliNotif.lua"))();
+local Notify = AkaliNotif.Notify;
+Notify({
+Description = "/Moonbeuti.cc";
+Title = "thanks for buying Moonbeuti.cc";
+Duration = 10;
+})
+
+-- Settings table
+local Settings = {
+    rewrittenmain = {
+        Enabled = true,
+        Key = "c",
+        DOT = true,
+        AIRSHOT = true,
+        NOTIF = true, 
+        AUTOPRED = true, 
+        FOV = math.huge,
+        RESOLVER = false 
+    },
+    orbit = {
+        Enabled = false,
+        Distance = 10,
+        Height = 5,
+        Speed = 1
+    }
+}
+
+-- Orbit section
+local orbitSection = AimingTab:CreateSector("Orbit", "top")
+
+orbitSection:AddToggle(
+    "Enabled",
+    false,
+    function(enabled)
+        Settings.orbit.Enabled = enabled
+    end
+)
+
+orbitSection:AddTextbox(
+    "Distance",
+    "10",
+    function(value)
+        Settings.orbit.Distance = tonumber(value) or 10
+    end
+)
+
+orbitSection:AddTextbox(
+    "Height",
+    "5",
+    function(value)
+        Settings.orbit.Height = tonumber(value) or 5
+    end
+)
+
+orbitSection:AddTextbox(
+    "Speed",
+    "1",
+    function(value)
+        Settings.orbit.Speed = tonumber(value) or 1
+    end
+)
+
+-- Other settings (you can add more sections or controls here)
+local testSection = AimingTab:CreateSector("Other", "top")
+
+testSection:AddToggle(
+    "Enabled",
+    false,
+    function(first)
+        Settings.rewrittenmain.TargetStrafe = first
+    end
+)
+
+testSection:AddTextbox(
+    "Distance",
+    nil,
+    function(State)
+        Settings.rewrittenmain.StrafeRadius = State
+    end
+)
+
+testSection:AddTextbox(
+    "Height",
+    nil,
+    function(State)
+        Settings.rewrittenmain.StrafeHeight = State
+    end
+)
+
+testSection:AddTextbox(
+    "Speed",
+    nil,
+    function(State)
+        Settings.rewrittenmain.StrafeSpeed = State
+    end
+)
